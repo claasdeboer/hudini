@@ -1,7 +1,7 @@
 # hudini
 
 [![PyPI](https://img.shields.io/pypi/v/hudini?color=2a78d6)](https://pypi.org/project/hudini/)
-[![License](https://img.shields.io/badge/license-Apache--2.0-2a78d6)](LICENSE)
+[![License](https://img.shields.io/badge/license-Apache--2.0-2a78d6)](https://github.com/claasdeboer/hudini/blob/main/LICENSE)
 [![Checkpoints](https://img.shields.io/badge/%F0%9F%A4%97%20checkpoints-nct--tso%2Fhudini-ffd21e)](https://huggingface.co/nct-tso/hudini)
 [![Annotations](https://img.shields.io/badge/%F0%9F%A4%97%20annotations-nct--tso%2Fhudini--annotations-ffd21e)](https://huggingface.co/datasets/nct-tso/hudini-annotations)
 
@@ -31,7 +31,7 @@ With this log you can, for example:
 > can lag the device by the rendering latency of the interface. The
 > instrument catalogs used for fuzzy matching cover the English and German system locales.
 
-![The instrument timeline of one SurgVU video, recovered by hudini](.github/timeline.png)
+![The instrument timeline of one SurgVU video, recovered by hudini](https://raw.githubusercontent.com/claasdeboer/hudini/main/.github/timeline.png)
 
 *The instrument timeline of one SurgVU video, recovered by hudini. Each
 row is one arm. The color shows the instrument class. Saturated color
