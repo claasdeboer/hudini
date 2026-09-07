@@ -11,9 +11,9 @@ The da Vinci Xi draws part of its system state into the surgical
 video through its user interface: the instrument on each arm, the arms under surgeon control, each
 energy pedal press, and the instruments outside the view. hudini reads
 this display and turns the pixels back into a log of events with
-timestamps. You do not need the robot logs.
+timestamps.
 
-With this log you can, for example:
+With this log you can:
 
 - find moments of interest in a video archive, such as stapler firings
   or energy activations
@@ -21,7 +21,7 @@ With this log you can, for example:
   activity, with no manual annotation
 - describe a case by its events: the instruments used, the time each
   arm was under surgeon control, the number of pedal presses
-- find the popups that show the surgeon's account name before you
+- find popups that leak the surgeon's account name before you
   share a recording
 
 > [!NOTE]
