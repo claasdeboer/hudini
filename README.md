@@ -7,29 +7,23 @@
 
 A UI/HUD parser for the da Vinci Xi.
 
-The da Vinci Xi draws part of its system state into the surgical
-video through its user interface: the instrument on each arm, the arms under surgeon control, each
-energy pedal press, and the instruments outside the view. hudini reads
-this display and turns the pixels back into a log of events with
-timestamps.
+hudini extracts system state from the da Vinci Xi user interface embedded in surgical video and turns it into a timestamped event log.
+It recovers mounted instruments, surgeon-controlled arms, energy pedal presses, off-screen indicators, tool association indicators and UI text - from video alone.
 
-With this log you can:
+With hudini you can:
 
-- find moments of interest in a video archive, such as stapler firings
-  or energy activations
-- label video for machine learning with instrument presence and arm
-  activity, with no manual annotation
-- describe a case by its events: the instruments used, the time each
-  arm was under surgeon control, the number of pedal presses
-- find popups that leak the surgeon's account name before you
-  share a recording
+- label video with the instrument on each arm and its time under surgeon
+  control, without manual annotation
+- search a video archive for every stapler firing, coagulation, vessel
+  sealing, and any other pedal-triggered action
+- mask the HUD before training to avoid shortcut learning
+- screen for popups that leak the surgeon's account name before sharing
+  a recording
 
 > [!NOTE]
-> hudini recovers only the state that the heads-up display shows. A
-> recording without the display contains nothing it can read, and it
-> does not infer the robot state from the surgical scene. The display
-> can lag the device by the rendering latency of the interface. The
-> instrument catalogs used for fuzzy matching cover the English and German system locales.
+> hudini requires the HUD to be visible in the recording. The HUD can lag
+> the device by its rendering latency. The instrument catalogs cover the
+> English and German system locales.
 
 ![The instrument timeline of one SurgVU video, recovered by hudini](https://raw.githubusercontent.com/claasdeboer/hudini/main/.github/timeline.png)
 
@@ -41,33 +35,24 @@ marks the time under surgeon control. Ticks mark pedal presses.*
 
 ```bash
 uv tool install "hudini[rfdetr]"
-hudini fetch                             # download the model checkpoints once
-hudini parse video.mp4                   # -> ./video.hudini.jsonl.gz
-hudini timeline video.hudini.jsonl.gz    # -> ./video.html
+
+hudini fetch
+hudini parse video.mp4
+hudini timeline video.hudini.jsonl.gz    
 ```
 
 `hudini parse` writes one compressed observation log. `hudini timeline`
-turns this log into a self-contained HTML page. Open the page in a
+turns the log into a self-contained HTML page. Open the page in a
 browser. If the video is in the same folder, the page plays it at the
 selected time.
 
-See [Installation](#installation) for the details.
-
-## Try it without your own data
-
-The `Surgical/utenn` subset of
-[PhysicalAI-Robotics-Open-H-Embodiment](https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Open-H-Embodiment)
-(NVIDIA, CC-BY-4.0) contains short da Vinci Xi clips with the display
-in the frame. One of them is enough to see hudini work:
+No Xi video at hand? Try hudini on a public sample from [Open-H-Embodiment](https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Open-H-Embodiment):
 
 ```bash
 curl -LO https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-Open-H-Embodiment/resolve/main/Surgical/utenn/surgical_video_datasets/videos/chunk-000/observation.images.color/episode_000009.mp4
 hudini parse episode_000009.mp4
 hudini timeline episode_000009.hudini.jsonl.gz
 ```
-
-Episode 009 contains two pedal presses. In the timeline, they appear as
-two ticks above the row of arm 3, at about 6 and 9 seconds.
 
 ## What hudini extracts
 
@@ -85,7 +70,7 @@ two ticks above the row of arm 3, at about 6 and 9 seconds.
 
 Every observation carries a timestamp and a confidence score. The
 layout, the popups, and the detected indicators also carry their
-bounding boxes in the frame.
+bounding boxes in frame coordinates.
 
 ## Output
 
