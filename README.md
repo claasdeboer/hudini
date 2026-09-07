@@ -40,7 +40,7 @@ marks the time under surgeon control. Ticks mark pedal presses.*
 ## Quick start
 
 ```bash
-uv tool install "hudini[rfdetr] @ git+https://github.com/claasdeboer/hudini"
+uv tool install "hudini[rfdetr]"
 hudini fetch                             # download the model checkpoints once
 hudini parse video.mp4                   # -> ./video.hudini.jsonl.gz
 hudini timeline video.hudini.jsonl.gz    # -> ./video.html
@@ -51,8 +51,7 @@ turns this log into a self-contained HTML page. Open the page in a
 browser. If the video is in the same folder, the page plays it at the
 selected time.
 
-A PyPI release will follow. Until then, install from GitHub. See
-[Installation](#installation) for the details.
+See [Installation](#installation) for the details.
 
 ## Try it without your own data
 
@@ -160,7 +159,20 @@ hudini screen video.hudini.jsonl.gz --json
 
 ## Installation
 
-hudini needs Python 3.12 or newer. A GPU makes parsing faster.
+hudini is on [PyPI](https://pypi.org/project/hudini/). It needs
+Python 3.12 or newer. A GPU makes parsing faster.
+
+```bash
+uv tool install "hudini[rfdetr]"
+```
+
+or, with pip, in a virtual environment:
+
+```bash
+pip install "hudini[rfdetr]"
+```
+
+To use the newest unreleased code instead, install from GitHub:
 
 ```bash
 uv tool install "hudini[rfdetr] @ git+https://github.com/claasdeboer/hudini"
