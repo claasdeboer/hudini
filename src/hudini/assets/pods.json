@@ -1,0 +1,266 @@
+{
+  "_description": "Da Vinci Xi pod strings — instrument names and system messages as they appear in the surgical UI. Stored lowercase; UI rendering should apply .title() (or similar) at display boundaries. Loading expands each entry into its aliases — the string forms it can be found under (canonical name, localized name, reload-color variants). Aliases are derived at load time and are not stored here.",
+  "_schema": {
+    "entries[i].name": "Canonical English UI name (required). Lowercase; how the instrument appears in the da Vinci surgeon-console UI.",
+    "entries[i].type": "Required. Taxonomy of the pod string (snake_case). For instruments it is the clinical/functional class — e.g. bipolar_grasper, needle_driver, stapler ('what does this tool do?'); non-instrument pod strings use system_message.",
+    "entries[i].localized": "Optional. {locale: name} for entries whose UI display is locale-specific (e.g. system messages rendered in German).",
+    "entries[i].reload_colors": "Optional. List of English color codes; expanded to 'name [color_locales[locale][c]]' at load time. Only present on stapler entries that have reload variants.",
+    "entries[i].pedals": "Optional. Per-pedal labels seen in the UI for this instrument, stored lowercase like other catalog strings. Shape: {yellow: [labels...], blue: [labels...]}. Each list is the labels that can appear on that pedal across instrument states, ORDERED WITH THE IDLE LABEL FIRST — what the pod shows while the pedal is not pressed. Multiple labels indicate state-dependent behavior (e.g. force bipolar yellow reads 'grip' idle and 'strong' held), and the reader only OCRs the label while a pedal is pressed, taking the idle one from here. An empty list means that pedal has no action for this instrument (e.g. maryland bipolar has no yellow pedal). Omitting the whole `pedals` field means unknown — do not infer from type, since some mechanical instruments may still have pedal actions."
+  },
+  "color_locales": {
+    "de": {
+      "gray": "grau",
+      "white": "weiss",
+      "blue": "blau",
+      "green": "grün",
+      "black": "schwarz"
+    },
+    "en": {
+      "gray": "gray",
+      "white": "white",
+      "blue": "blue",
+      "green": "green",
+      "black": "black"
+    }
+  },
+  "entries": [
+    {
+      "name": "maryland bipolar forceps",
+      "type": "bipolar_grasper",
+      "pedals": { "yellow": [], "blue": ["bipolar"] }
+    },
+    {
+      "name": "curved bipolar dissector",
+      "type": "bipolar_grasper",
+      "pedals": { "yellow": [], "blue": ["coag"] }
+    },
+    {
+      "name": "long bipolar grasper",
+      "type": "bipolar_grasper",
+      "pedals": { "yellow": [], "blue": ["coag"] }
+    },
+    {
+      "name": "force bipolar",
+      "type": "bipolar_grasper",
+      "pedals": { "yellow": ["grip", "strong"], "blue": ["coag"] }
+    },
+    {
+      "name": "micro bipolar forceps",
+      "type": "bipolar_grasper",
+      "pedals": { "yellow": [], "blue": ["coag"] }
+    },
+    {
+      "name": "fenestrated bipolar forceps",
+      "type": "bipolar_grasper",
+      "pedals": { "yellow": [], "blue": ["coag"] }
+    },
+
+    {
+      "name": "medium-large clip applier",
+      "type": "clip_applier",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+    {
+      "name": "large clip applier",
+      "type": "clip_applier",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+    {
+      "name": "small clip applier",
+      "type": "clip_applier",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+
+    {
+      "name": "potts scissors",
+      "type": "cold_scissors",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+    { "name": "round tip scissors", "type": "cold_scissors" },
+    { "name": "curved scissors", "type": "cold_scissors" },
+
+    {
+      "name": "prograsp forceps",
+      "type": "grasper",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+    { "name": "long tip forceps", "type": "grasper" },
+    {
+      "name": "small grasping retractor",
+      "type": "grasper",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+    { "name": "cobra grasper", "type": "grasper" },
+    {
+      "name": "crocodile grasper",
+      "type": "grasper",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+    {
+      "name": "tip-up fenestrated grasper",
+      "type": "grasper",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+    {
+      "name": "cadiere forceps",
+      "type": "grasper",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+    {
+      "name": "tenaculum forceps",
+      "type": "grasper",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+    { "name": "fundus grasper", "type": "grasper" },
+    { "name": "maryland dissector", "type": "grasper" },
+    {
+      "name": "resano forceps",
+      "type": "grasper",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+    { "name": "dual blade retractor", "type": "grasper" },
+    { "name": "cardiac probe grasper", "type": "grasper" },
+    { "name": "atrial retractor short right", "type": "grasper" },
+    {
+      "name": "black diamond micro forceps",
+      "type": "grasper",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+    {
+      "name": "debakey forceps",
+      "type": "grasper",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+
+    {
+      "name": "monopolar curved scissors",
+      "type": "monopolar_cautery",
+      "pedals": { "yellow": ["cut"], "blue": ["coag"] }
+    },
+    {
+      "name": "permanent cautery spatula",
+      "type": "monopolar_cautery",
+      "pedals": { "yellow": ["cut"], "blue": ["coag"] }
+    },
+    {
+      "name": "permanent cautery hook",
+      "type": "monopolar_cautery",
+      "pedals": { "yellow": ["cut"], "blue": ["coag"] }
+    },
+
+    {
+      "name": "large needle driver",
+      "type": "needle_driver",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+    {
+      "name": "mega needle driver",
+      "type": "needle_driver",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+    {
+      "name": "large suturecut needle driver",
+      "type": "needle_driver",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+    {
+      "name": "mega suturecut needle driver",
+      "type": "needle_driver",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+    { "name": "wristed needle driver", "type": "needle_driver" },
+    {
+      "name": "curved needle driver",
+      "type": "needle_driver",
+      "pedals": { "yellow": [], "blue": [] }
+    },
+
+    {
+      "name": "sureform 60",
+      "type": "stapler",
+      "reload_colors": ["white", "blue", "green", "black"],
+      "pedals": { "yellow": ["fire"], "blue": ["clamp"] }
+    },
+    {
+      "name": "sureform 45",
+      "type": "stapler",
+      "reload_colors": ["gray", "white", "blue", "green", "black"],
+      "pedals": { "yellow": ["fire"], "blue": ["clamp"] }
+    },
+    {
+      "name": "sureform 45 curved-tip",
+      "type": "stapler",
+      "reload_colors": ["gray", "white", "blue", "green", "black"],
+      "pedals": { "yellow": ["fire"], "blue": ["clamp"] }
+    },
+    {
+      "name": "sureform 30 curved-tip",
+      "type": "stapler",
+      "reload_colors": ["gray", "white", "blue"],
+      "pedals": { "yellow": ["fire"], "blue": ["clamp"] }
+    },
+    {
+      "name": "stapler 30",
+      "type": "stapler",
+      "reload_colors": ["gray", "white", "blue", "green"],
+      "pedals": { "yellow": ["fire"], "blue": ["clamp"] }
+    },
+    {
+      "name": "stapler 30 curved-tip",
+      "type": "stapler",
+      "reload_colors": ["gray", "white", "blue", "green"],
+      "pedals": { "yellow": ["fire"], "blue": ["clamp"] }
+    },
+    {
+      "name": "stapler 45",
+      "type": "stapler",
+      "reload_colors": ["white", "blue", "green"],
+      "pedals": { "yellow": ["fire"], "blue": ["clamp"] }
+    },
+    {
+      "name": "stapler 45 curved-tip",
+      "type": "stapler",
+      "reload_colors": ["white", "blue", "green"],
+      "pedals": { "yellow": ["fire"], "blue": ["clamp"] }
+    },
+
+    {
+      "name": "suction irrigator",
+      "type": "suction_irrigator",
+      "pedals": { "yellow": ["irrigate"], "blue": ["suction"] }
+    },
+
+    {
+      "name": "remove instrument",
+      "type": "system_message",
+      "localized": { "de": "instrument entfernen" }
+    },
+    {
+      "name": "arm stowed",
+      "type": "system_message",
+      "localized": { "de": "arm in stau-position" }
+    },
+
+    {
+      "name": "harmonic ace",
+      "type": "ultrasonic_shears",
+      "pedals": { "yellow": ["min"], "blue": ["max"] }
+    },
+
+    {
+      "name": "vessel sealer",
+      "type": "vessel_sealer",
+      "pedals": { "yellow": ["cut"], "blue": ["bipolar", "seal"] }
+    },
+    {
+      "name": "vessel sealer extend",
+      "type": "vessel_sealer",
+      "pedals": { "yellow": ["cut"], "blue": ["seal"] }
+    },
+    {
+      "name": "synchroseal",
+      "type": "vessel_sealer",
+      "pedals": { "yellow": ["sync"], "blue": ["seal", "coag"] }
+    }
+  ]
+}

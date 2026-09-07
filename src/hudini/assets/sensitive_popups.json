@@ -1,0 +1,9 @@
+[
+  {
+    "id": "energy_preset_applied",
+    "templates": {
+      "de": "{surgeon}s 'preset {x}' energievoreinstellung angewendet",
+      "en": "{surgeon}'s '{x}' energy preset applied"
+    }
+  }
+]

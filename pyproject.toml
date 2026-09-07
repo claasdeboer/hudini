@@ -1,0 +1,78 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "hudini"
+version = "0.1.0"
+description = "A UI/HUD parser for the da Vinci Xi."
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [{ name = "Claas de Boer", email = "claas.deboer@nct-dresden.de" }]
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=1.24.0",
+    "opencv-python-headless>=4.13.0.0",
+    "pillow>=12.1.0",
+    "rapidfuzz>=3.14.3",
+    "torch>=2.0.0",
+    "torchvision>=0.25.0",
+    "timm>=1.0.0",
+    "av>=12.0.0",
+    "tqdm>=4.0.0",
+    "paddleocr>=3.7.0",
+    "transformers>=5.12.0",
+    "msgspec>=0.19.0",
+    "huggingface-hub>=1.0",
+]
+
+[project.optional-dependencies]
+rfdetr = [
+    "rfdetr>=1.0",
+    "supervision>=0.28",
+]
+dev = [
+    "ruff>=0.16.0",
+    "ty>=0.0.1a21",
+    "pytest>=9.1.1",
+    "hypothesis>=6.100",
+    # Metadata-only stub (tools/opencv-contrib-python-stub): paddlex 3.7 checks
+    # for this distribution by name while opencv-python-headless provides cv2.
+    "opencv-contrib-python",
+]
+
+[project.scripts]
+hudini = "hudini.cli:main"
+
+[project.urls]
+Repository = "https://github.com/claasdeboer/hudini"
+Models = "https://huggingface.co/nct-tso/hudini"
+Annotations = "https://huggingface.co/datasets/nct-tso/hudini-annotations"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+extend-select = ["I"]
+
+[tool.uv]
+
+# supervision pulls opencv-python, whose cv2 clobbers the headless install.
+# The never-true marker drops it. paddlex[ocr-core] pulls opencv-contrib-python,
+# which resolves to the local metadata-only stub.
+override-dependencies = [
+    "opencv-python; sys_platform == 'never'",
+]
+
+[tool.uv.sources]
+opencv-contrib-python = { path = "tools/opencv-contrib-python-stub" }
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/hudini"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "integration: runs real components (models, files, git); slower than unit tests",
+]

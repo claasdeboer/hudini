@@ -1,0 +1,11 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "opencv-contrib-python"
+version = "4.10.0.84"
+description = "Metadata-only stub. paddlex 3.7+ checks for this distribution name before it builds an OCR pipeline; the real cv2 in this repo is opencv-python-headless. See [tool.uv] in the root pyproject."
+
+[tool.hatch.build.targets.wheel]
+bypass-selection = true
